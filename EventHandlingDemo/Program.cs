@@ -18,6 +18,10 @@ namespace ConsoleApp10
 
 				alarm.Alarm();
 			}
+			else
+			{
+				Console.WriteLine($"Welcome, {person.name}!");
+			}
 
 		}
 		public class Person
@@ -26,12 +30,12 @@ namespace ConsoleApp10
 
 			public void HandleAlarm(object sender, UserBannedEventArgs e)
 			{
-				Console.WriteLine($"Firealarm : This {e._username} You are not allowed.");
+				Console.WriteLine($"Firealarm : This {e._message} You are not allowed.");
 			}
 
 			public void SendEmail(object sender, UserBannedEventArgs e)
 			{
-				Console.WriteLine($"Email Sent: This {e._username} is not allowed");
+				Console.WriteLine($"Email Sent: This {e._message} is not allowed");
 			}
 
 		}
@@ -46,7 +50,7 @@ namespace ConsoleApp10
 				UserBannedEventHandler alarm = userevent;
 				if (userevent != null)
 				{
-					alarm(this, new UserBannedEventArgs("The user is no allowed"));
+					alarm(this, new UserBannedEventArgs(""));
 				}
 
 			}
@@ -56,10 +60,10 @@ namespace ConsoleApp10
 
 		public class UserBannedEventArgs : EventArgs
 		{
-			public string _username { get; set; }
-			public UserBannedEventArgs(string username)
+			public string _message { get; set; }
+			public UserBannedEventArgs(string message)
 			{
-				this._username = username;
+				this._message = message;
 
 			}
 		}
